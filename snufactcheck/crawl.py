@@ -3,7 +3,6 @@ import glob
 import requests
 import re
 from bs4 import BeautifulSoup
-import csv
 import time
 from multiprocessing import Pool
 import pandas as pd
@@ -56,9 +55,9 @@ def crawl(topic_id):
 
             # 진위여부가 판단 된 경우 내용, 말한 이, 출처를 html 에서 selector 를 이용해서 뽑아낸다.
             if decided:
-                topic = soup.select('#container > div > div.left_article > div > ul > li:nth-child(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.prg.fcItem_li > p:nth-child(3) > a')
-                source = soup.select('#container > div > div.left_article > div > ul > li:nth-child(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.person.fcItem_li > p')
-                reference = soup.select('#container > div > div.left_article > div > ul > li:nth-child(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.prg.fcItem_li > a')
+                topic = soup.select('#container > div > div.left_article > div > ul > li:nth-of-type(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.prg.fcItem_li > p:nth-of-type(2) > a')
+                source = soup.select('#container > div > div.left_article > div > ul > li:nth-of-type(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.person.fcItem_li > p')
+                reference = soup.select('#container > div > div.left_article > div > ul > li:nth-of-type(' + str(i + 1) + ') > div > div.fcItem_top.clearfix > div.prg.fcItem_li > a')
 
                 # 하나의 주제에서 발견한 모든 내용을 list 에 저장한다.
                 results.append(crawlCsv(topic_id, tf, id, topic, source, reference))
